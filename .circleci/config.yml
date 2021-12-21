@@ -42,7 +42,7 @@ jobs:
       - run:
           name: Run smoke test
           command: |
-            URL="http://ec2-18-117-153-129.us-east-2.compute.amazonaws.com:3000/"
+            URL="www.google.com"
             if curl -s --head ${URL}
             then return 0
             else return 1
