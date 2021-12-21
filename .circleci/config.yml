@@ -24,15 +24,15 @@ jobs:
     steps:
       - checkout
       - add_ssh_keys:
-        fingerprints: ["59:5b:97:8f:f8:1c:10:c6:f4:54:bb:b0:c6:6d:74:09"]
+          fingerprints: ["59:5b:97:8f:f8:1c:10:c6:f4:54:bb:b0:c6:6d:74:09"]
       - run:
-        name: Install Ansible
-        command: |
-          apk add --update ansible
+          name: Install Ansible
+          command: |
+            apk add --update ansible
       - run:
-        name: Configure server
-        command: |
-          ansible-playbook -i inventory main-remote.yml
+          name: Configure server
+          command: |
+            ansible-playbook -i inventory main-remote.yml
 
 
 
