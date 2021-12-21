@@ -18,7 +18,7 @@
 - name: "install dependencies."
   become: yes
   apt:
-    name: ["npm"] # This line would also typically install "nodejs" but broken, so installed manually in instance using sudo npm cache clean -f & sudo npm install -g n & sudo n stable
+    name: ["npm"] # This line would also typically install "nodejs" but broken, so installed node in the step below
     state: latest
     update_cache: yes
 
