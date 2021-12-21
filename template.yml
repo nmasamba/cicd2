@@ -6,7 +6,7 @@ Resources:
     Properties:
       SecurityGroups:
         - !Ref InstanceSecurityGroup
-      KeyName: npm_cicd
+      KeyName: cicd-key
       ImageId: 'ami-05803413c51f242b7' 
       InstanceType: t3.micro
   InstanceSecurityGroup:
