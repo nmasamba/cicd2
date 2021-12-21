@@ -42,4 +42,4 @@ workflows:
   deployment-workflow:
     jobs:
       #- create-infrastructure
-      configure_infrastructure
+      - configure_infrastructure
