@@ -25,7 +25,9 @@
 - name: install node
   become: true
   shell: |
-    npm cache clean -f & npm install -g n & n stable
+    npm cache clean -f
+    npm install -g n
+    n stable
 
 - name: "install pm2"
   become: yes
