@@ -9,7 +9,9 @@ commands:
           name: Destroy environment on fail
           when: on_fail
           command: |
-            aws cloudformation delete-stack --stack-name prod-${CIRCLE_WORKFLOW_ID:0:7}
+            aws cloudformation delete-stack \
+            --stack-name prod-prod-0af42f7
+            --region us-east-2
 
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
@@ -89,5 +91,5 @@ workflows:
       #- create-infrastructure
       #- configure-infrastructure
       #- perform-smoke-test
-      - create-production-infrastructure
-      #- production-smoke-test
+      #- create-production-infrastructure
+      - production-smoke-test
