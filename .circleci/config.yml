@@ -90,5 +90,5 @@ workflows:
       #- configure-infrastructure
       #- perform-smoke-test
       - create-production-infrastructure
-      - production-smoke-test
+      - production-smoke-test:
         requires: [create-production-infrastructure]
