@@ -2,6 +2,15 @@
 # See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
+commands:
+  destroy-environment:
+    steps:
+      - run:
+        name: Destroy environment on fail
+        when: on_fail
+        command: |
+          aws cloudformation delete-stack --stack-name prod-${CIRCLE_WORKFLOW_ID:0:7}
+
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
@@ -16,6 +25,19 @@ jobs:
             aws cloudformation deploy \
             --template-file template.yml \
             --stack-name infrastack-${CIRCLE_WORKFLOW_ID:0:5} \
+            --region us-east-2
+
+  create-production-infrastructure:
+    docker:
+      - image: amazon/aws-cli
+    steps:
+      - checkout
+      - run:
+          name: Create CloudFormation stack in production
+          command: |
+            aws cloudformation deploy \
+            --template-file template.yml \
+            --stack-name prod-${CIRCLE_WORKFLOW_ID:0:7} \
             --region us-east-2
 
   configure-infrastructure:
@@ -48,6 +70,15 @@ jobs:
             else return 1
             fi
 
+  production-smoke-test:
+    docker:
+      - image: alpine:latest
+    steps:
+      - run:
+        name: Test production job
+        command: return 1 # Simulating error
+      - destroy-environment
+
 
 
 # Invoke jobs via workflows
@@ -57,4 +88,7 @@ workflows:
     jobs:
       #- create-infrastructure
       #- configure-infrastructure
-      - perform-smoke-test
+      #- perform-smoke-test
+      - create-production-infrastructure
+      - production-smoke-test
+        requires: [create-production-infrastructure]
