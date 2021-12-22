@@ -10,7 +10,7 @@ commands:
           when: on_fail
           command: |
             aws cloudformation delete-stack \
-            --stack-name prod-prod-0af42f7 \
+            --stack-name prod-0af42f7 \
             --region us-east-2
 
 # Define a job to be invoked later in a workflow.
