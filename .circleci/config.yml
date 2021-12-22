@@ -76,7 +76,7 @@ jobs:
     steps:
       - run:
           name: Test production job
-          command: return 1 # Simulating error
+          command: exit 1 # Simulating error
       - destroy-environment
 
 
