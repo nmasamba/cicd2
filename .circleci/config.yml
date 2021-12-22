@@ -76,7 +76,7 @@ jobs:
     steps:
       - run:
           name: Test production job
-          command: exit 0 # Simulating error
+          command: exit 1 # Simulating error
       - destroy-environment
 
 
@@ -89,6 +89,5 @@ workflows:
       #- create-infrastructure
       #- configure-infrastructure
       #- perform-smoke-test
-      - create-production-infrastructure
-      - production-smoke-test:
-          requires: [create-production-infrastructure]
+      #- create-production-infrastructure
+      - production-smoke-test
