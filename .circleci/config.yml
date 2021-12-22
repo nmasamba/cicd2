@@ -89,5 +89,5 @@ workflows:
       #- create-infrastructure
       #- configure-infrastructure
       #- perform-smoke-test
-      #- create-production-infrastructure
-      - production-smoke-test
+      - create-production-infrastructure
+      #- production-smoke-test
