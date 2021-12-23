@@ -107,8 +107,8 @@ jobs:
             command: |
               aws cloudformation \
               list-exports --query "Exports[?Name==\`PipelineID\`].Value" \
-              --no-paginate --output text > ~/textfile.txt
-              --region us-east-2
+              --no-paginate --region us-east-2 \
+              --output text > ~/textfile.txt
         - persist_to_workspace:
             root: ~/
             paths: 
@@ -159,13 +159,13 @@ workflows:
       #- create-production-infrastructure
       #- production-smoke-test:
           #requires: [create-production-infrastructure]
-
-      - create_and_deploy_front_end
-      - promote_to_production:
-          requires: 
-            - create_and_deploy_front_end
+      
       - get_last_deployment_id
+      #- create_and_deploy_front_end
+      #- promote_to_production:
+          #requires: 
+            #- create_and_deploy_front_end
       - clean_up_old_front_end:
           requires:
             - get_last_deployment_id
-            - promote_to_production
+            #- promote_to_production
