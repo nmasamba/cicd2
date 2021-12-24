@@ -1,0 +1,14 @@
+groups:
+  - name: AllInstances
+    rules:
+      - alert: UsingTooMuchMemory
+        # Insert condition for alerting below
+        expr: node_memory_MemFree_bytes < 1000000
+        for: 1m
+        # Annotations enable the rule to broadcast more information
+        annotations:
+          title: 'Instance {{ $labels.instance }}'
+          description: '{{ $labels.instance }} of job {{ $labels.job }} is almost out of memory. '
+        # Additional labels to attach to the alert
+        labels:
+          severity: 'critical'

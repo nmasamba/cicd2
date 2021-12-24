@@ -1,0 +1,14 @@
+groups:
+  - name: Down
+    rules:
+      - alert: InstanceDown
+        # Insert condition for alerting below
+        expr: up == 0
+        for: 1m
+        # Annotations enable the rule to broadcast more information
+        annotations:
+          title: 'Instance {{ $labels.instance }}'
+          description: '{{ $labels.instance }} of job {{ $labels.job }} is down and out. '
+        # Additional labels to attach to the alert
+        labels:
+          severity: 'critical'
